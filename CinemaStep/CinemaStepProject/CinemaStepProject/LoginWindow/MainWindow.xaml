@@ -1,0 +1,40 @@
+﻿    <Window x:Class="LoginWindow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LoginWindow"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="150" Width="300" Style="{DynamicResource WindowStyle}" WindowStyle="None" 
+            ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <!--<Window.DataContext>
+        <local:LoginWindowViewModel/>
+    </Window.DataContext>-->
+        
+    <Window.Resources>
+        <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
+            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+
+        <StackPanel>
+            <TextBlock Text="Enter your phone-number: " Margin="5" Foreground="Wheat"/>
+            <TextBox Margin="5" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="Enter your password: " Margin="5" Foreground="Wheat"/>
+            <PasswordBox Margin="5" Name="passwordbox_login"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="If you've not signed up yet ----> " Foreground="Wheat" Margin="5" FontSize="10" TextWrapping="WrapWithOverflow" Width="92"/>
+                <Button HorizontalAlignment="Center" Content="Sign Up" Margin="5" Command="{Binding SignUpCommand}"/>
+                <Button HorizontalAlignment="Center" Content="Sign In" Margin="5" Command="{Binding SignInCommand}" CommandParameter="{Binding ElementName=passwordbox_login}"/>
+                <TextBlock Text=" If you've signed >----- up already" Foreground="Wheat" Margin="5" Width="86" TextWrapping="WrapWithOverflow" Height="27" FontSize="10"/>
+            </StackPanel>
+
+        </StackPanel>
+        
+    </Grid>
+        
+</Window>

@@ -1,0 +1,6 @@
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\bin\Debug\MWVMLib.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\bin\Debug\MWVMLib.pdb
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\obj\Debug\MWVMLib.csprojAssemblyReference.cache
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\obj\Debug\MWVMLib.csproj.CoreCompileInputs.cache
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\obj\Debug\MWVMLib.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\MVVMLib\obj\Debug\MWVMLib.pdb

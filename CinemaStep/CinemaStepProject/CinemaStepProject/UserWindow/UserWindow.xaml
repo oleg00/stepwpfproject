@@ -1,0 +1,251 @@
+﻿<Window x:Class="UserWindow.UserWindowClass"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:local="clr-namespace:UserWindow"
+        
+        mc:Ignorable="d"
+        Title="{Binding Phone_Number}" MinHeight="700" Width="500" ResizeMode="NoResize" WindowStyle="None"
+        Style="{DynamicResource WindowStyle}" WindowStartupLocation="CenterScreen" SizeToContent="Height">
+
+
+    <Window.Resources>
+        <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
+            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+        </Style>
+
+        <Style x:Key="DefaultMarginStyle" TargetType="{x:Type Control}">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        
+        <Style x:Key="TextblockWeatherValueStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Margin" Value="0 0 50 0"/>
+            <Setter Property="Foreground" Value="FloralWhite"/>
+        </Style>
+
+        <Style x:Key="TextblockWeatherOptionStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Foreground" Value="Wheat"/>
+        </Style>
+        
+        <Style x:Key="ListBoxStyle" TargetType="ListBox">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TextblockColorStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Wheat"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+
+        <local:UrlToImageSourceConverter x:Key="UrlToImageSourceConverter" />
+    </Window.Resources>
+
+    <Grid>
+
+        <TabControl>
+
+            <TabItem Header="Order Ticket">
+                <StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                        <StackPanel Margin="10 0 0 0">
+                            <TextBlock Text="Choose your city: " Style="{StaticResource TextblockColorStyle}"/>
+                            <ComboBox Width="100" HorizontalAlignment="Left" Margin="5" ItemsSource="{Binding Cities}" SelectedItem="{Binding SelectedCity}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding CityChangedCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <StackPanel Margin="70 0 0 0">
+                            <TextBlock Text="Choose your cinema: " Style="{StaticResource TextblockColorStyle}"/>
+                            <ComboBox Width="140" HorizontalAlignment="Left" Margin="5"
+                                      ItemsSource="{Binding Cinemas, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedCinema, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <TextBlock Text="Choose the category of film: " Style="{StaticResource TextblockColorStyle}"/>
+                        <ComboBox Width="100" Margin="5" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding CategoryChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <ListBox Margin="10" 
+                             ItemsSource="{Binding Films}"
+                             IsSynchronizedWithCurrentItem="True" 
+                             SelectedItem="{Binding SelectedFilm, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Style="{DynamicResource ListBoxStyle}">
+
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Image Source="{Binding image_url, Converter={StaticResource UrlToImageSourceConverter}}" Width="230" Height="230" Stretch="Uniform" />
+                                    <TextBlock Style="{StaticResource TextblockColorStyle}" Text="{Binding title}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding FilmChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </ListBox>
+
+
+                    <DockPanel Margin="5" >
+                        <TextBlock Text="Available Sessions: " Style="{StaticResource TextblockColorStyle}"  HorizontalAlignment="Left"/>
+                        <TextBlock Text="Take your place: " Style="{StaticResource TextblockColorStyle}" HorizontalAlignment="Right"/>
+                    </DockPanel>
+
+                    <DockPanel Margin="5">
+                        <ListBox ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 SelectedItem="{Binding SelectedSession, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 Width="300" 
+                                 HorizontalAlignment="Left"
+                                 Margin="5 0 0 0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <!--<TextBlock Text="Movie: "/>
+                                        <TextBlock Text="{Binding SelectedFilm.title}" DataContext="{x:Reference UserWindowViewModel}"/>-->
+                                        <TextBlock Text="Hall: "/>
+                                        <TextBlock Text="{Binding id_hall}"/>
+                                        <TextBlock Text=" Date: "/>
+                                        <TextBlock Text="{Binding Path=date, StringFormat='{}{0:MM/dd/yyyy a\\t h:mm }'}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SessionChangedCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
+                        </ListBox>
+
+                        <ComboBox HorizontalAlignment="Right"
+                                  Width="100"
+                                  ItemsSource="{Binding FreePlacesForSession}"
+                                  SelectedItem="{Binding SelectedPlace, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+
+                    <Button Content="To Order A Ticket" Margin="20" HorizontalAlignment="Center" Command="{Binding ToOrderCommand}" Height="50"/>
+
+                    <TextBlock Text="{Binding StatusText, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Style="{StaticResource TextblockColorStyle}"/>
+
+                    <TextBlock Text="Get the distance to your cinema: " Style="{StaticResource TextblockColorStyle}" HorizontalAlignment="Center" TextDecorations="Underline"/>
+
+                    <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Text="Your address: " Style="{StaticResource TextblockColorStyle}" />
+                        <TextBox Text="{Binding UserAddress, UpdateSourceTrigger=PropertyChanged}" Margin="2" MinWidth="150"/>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" >
+                        <Button Content="Get Distance" Margin="10" Command="{Binding GetDistanceCommand}"/>
+                        <TextBox Text="{Binding DistanceToCinema, UpdateSourceTrigger=PropertyChanged}" Margin="10" MinWidth="100" IsReadOnly="True"/>
+                    </StackPanel>
+
+
+
+                </StackPanel>
+
+            </TabItem>
+
+            <TabItem Header="Check Out Film Information">
+
+                <StackPanel CanVerticallyScroll="True">
+
+                    <TextBlock Text="Movies:" HorizontalAlignment="Center" Style="{StaticResource TextblockColorStyle}"/>
+                    <ComboBox Width="300" Margin="5"
+                              ItemsSource="{Binding Films_FilmInfo}"
+                              SelectedItem="{Binding SelectedFilm_FilmInfo, UpdateSourceTrigger=PropertyChanged}">
+
+                        <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Stretch="Uniform" Margin="5" Width="128" Height="128" Source="{Binding image_url, Converter={StaticResource UrlToImageSourceConverter}, IsAsync=True}" />
+                                <TextBlock Text="{Binding title}" Margin="3" VerticalAlignment="Center" FontWeight="Bold"/>
+                            </StackPanel>
+                        </DataTemplate>
+                        </ComboBox.ItemTemplate>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Film_Info_FilmChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        
+                    </ComboBox>
+
+                    <WebBrowser Margin="20"
+                                local:WebBrowserUtility.BindableSource="{Binding CurrentReviewUrl}" 
+                                Height="360"
+                                />
+
+                    <TextBox IsReadOnly="True" TextWrapping="WrapWithOverflow" Text="{Binding CurrentFilmDescription}" Margin="20"/>
+
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Check The Weather">
+
+                <StackPanel MinWidth="200">
+                    
+                    <DockPanel>
+                        <TextBlock Text="Weather Status:" Style="{StaticResource TextblockWeatherOptionStyle}"/>
+                        <TextBlock Style="{StaticResource TextblockWeatherValueStyle}" FontSize="20" Text="{Binding WeatherStatus, UpdateSourceTrigger=PropertyChanged}" />
+                    </DockPanel>
+
+                    <DockPanel>
+                    <TextBlock Text="Temperature:" Style="{StaticResource TextblockWeatherOptionStyle}"/>
+                        <TextBlock Style="{StaticResource TextblockWeatherValueStyle}" Text="{Binding WeatherTemperature, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+                    
+                    <DockPanel>
+                    <TextBlock Text="Wind:" Style="{StaticResource TextblockWeatherOptionStyle}"/>
+                        <TextBlock Style="{StaticResource TextblockWeatherValueStyle}" Text="{Binding WeatherWind, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+                    
+                    <DockPanel>
+                    <TextBlock Text="Rain:"  Style="{StaticResource TextblockWeatherOptionStyle}"/>
+                        <TextBlock Style="{StaticResource TextblockWeatherValueStyle}" Text="{Binding WeatherRain, UpdateSourceTrigger=PropertyChanged}"/>
+                    </DockPanel>
+                    <Image Source="{Binding WeatherImageSource, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource UrlToImageSourceConverter},IsAsync=True}" 
+                           Height="350" Width="350" Stretch="Fill"/>
+
+                </StackPanel>
+                
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>

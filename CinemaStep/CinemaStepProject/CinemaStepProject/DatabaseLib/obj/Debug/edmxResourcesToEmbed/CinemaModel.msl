@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CinemaModelStoreContainer" CdmEntityContainer="CinemaEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="CinemaModel.Categories">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cinemas">
+      <EntityTypeMapping TypeName="CinemaModel.Cinemas">
+        <MappingFragment StoreEntitySet="Cinemas">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id_city" ColumnName="id_city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="CinemaModel.Cities">
+        <MappingFragment StoreEntitySet="Cities">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmCategories">
+      <EntityTypeMapping TypeName="CinemaModel.FilmCategories">
+        <MappingFragment StoreEntitySet="FilmCategories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_film" ColumnName="id_film" />
+          <ScalarProperty Name="id_category" ColumnName="id_category" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmDescription">
+      <EntityTypeMapping TypeName="CinemaModel.FilmDescription">
+        <MappingFragment StoreEntitySet="FilmDescription">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_film" ColumnName="id_film" />
+          <ScalarProperty Name="content" ColumnName="content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Films">
+      <EntityTypeMapping TypeName="CinemaModel.Films">
+        <MappingFragment StoreEntitySet="Films">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="trailer_url" ColumnName="trailer_url" />
+          <ScalarProperty Name="image_url" ColumnName="image_url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FreePlacesForSession">
+      <EntityTypeMapping TypeName="CinemaModel.FreePlacesForSession">
+        <MappingFragment StoreEntitySet="FreePlacesForSession">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_hall" ColumnName="id_hall" />
+          <ScalarProperty Name="place_number" ColumnName="place_number" />
+          <ScalarProperty Name="is_empty" ColumnName="is_empty" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hall">
+      <EntityTypeMapping TypeName="CinemaModel.Hall">
+        <MappingFragment StoreEntitySet="Hall">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="title_number" ColumnName="title_number" />
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MovieSession">
+      <EntityTypeMapping TypeName="CinemaModel.MovieSession">
+        <MappingFragment StoreEntitySet="MovieSession">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_film" ColumnName="id_film" />
+          <ScalarProperty Name="id_cinema" ColumnName="id_cinema" />
+          <ScalarProperty Name="id_hall" ColumnName="id_hall" />
+          <ScalarProperty Name="date" ColumnName="date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Receipts">
+      <EntityTypeMapping TypeName="CinemaModel.Receipts">
+        <MappingFragment StoreEntitySet="Receipts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+          <ScalarProperty Name="content" ColumnName="content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tickets">
+      <EntityTypeMapping TypeName="CinemaModel.Tickets">
+        <MappingFragment StoreEntitySet="Tickets">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="id_session" ColumnName="id_session" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="CinemaModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

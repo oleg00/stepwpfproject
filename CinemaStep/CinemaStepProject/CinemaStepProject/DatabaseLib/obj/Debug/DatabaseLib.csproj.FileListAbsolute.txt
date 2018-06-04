@@ -1,0 +1,14 @@
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\DatabaseLib.dll.config
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\DatabaseLib.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\DatabaseLib.pdb
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\EntityFramework.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\EntityFramework.SqlServer.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\MWVMLib.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\MWVMLib.pdb
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\EntityFramework.xml
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\bin\Debug\EntityFramework.SqlServer.xml
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\obj\Debug\DatabaseLib.csprojAssemblyReference.cache
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\obj\Debug\DatabaseLib.csproj.CoreCompileInputs.cache
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\obj\Debug\DatabaseLib.csproj.CopyComplete
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\obj\Debug\DatabaseLib.dll
+D:\.NET Projects\CinemaStep\CinemaStep\CinemaStepProject\DatabaseLib\obj\Debug\DatabaseLib.pdb

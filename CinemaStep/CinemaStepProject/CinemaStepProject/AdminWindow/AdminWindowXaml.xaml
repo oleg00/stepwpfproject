@@ -1,0 +1,376 @@
+﻿<Window x:Class="AdminWindow.AdminWindowXaml"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdminWindow"
+        mc:Ignorable="d"
+        Title="AdminWindowXaml" 
+         MinHeight="700" Width="500" ResizeMode="NoResize" WindowStyle="None"
+        Style="{DynamicResource WindowStyle}" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
+            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+        </Style>
+
+        <Style x:Key="TextBlockColorStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Wheat"/>
+        </Style>
+
+        <Style x:Key="TextBlockHeaderStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="Wheat"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+        
+    </Window.Resources>
+
+    <Grid>
+
+        <TabControl>
+
+            <TabItem  Header="Edit City" >
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock Text="Here you can add the city:" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <TextBox Margin="10" ToolTip="Input the city to add." Text="{Binding CityToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding AddCityCommand}">Add</Button>
+                            <Button Margin="5" Command="{Binding CancelAddingCityCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock Text="Here you can remove the city (if you went wrong):" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <ComboBox ItemsSource="{Binding CitiesToDelete, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCityToDelete}" Margin="10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding RemoveCityCommand}">Remove</Button>
+                            <Button Margin="5" Command="{Binding CancelRemovingCityCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                        <TextBlock Text="Here you can edit the city name:" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center"  Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <DataGrid ItemsSource="{Binding Cities, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="City Name:" Binding="{Binding title}" Width="170"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Save" Command="{Binding DatabaseSaveChangesCommand}" Margin="10"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </TabItem>
+
+
+            <TabItem  Header="Edit Cinema">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock Text="Here you can add the cinema:" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <TextBlock Text="Choose the city:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <ComboBox ItemsSource="{Binding Cities}" Margin="5" SelectedItem="{Binding SelectedCity, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Title of the cinema:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Margin="10" ToolTip="Input the title of cinema to add." Text="{Binding TitleOfCinemaToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Address of the cinema:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Margin="10" ToolTip="Input the address of cinema to add." Text="{Binding AddressOfCinemaToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding AddCinemaCommand}">Add</Button>
+                            <Button Margin="5" Command="{Binding CancelAddingCinemaCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock Text="Here you can remove the city (if you went wrong):" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <ComboBox ItemsSource="{Binding CinemasToDelete}" SelectedItem="{Binding SelectedCinemaToDelete}" Margin="10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding RemoveCinemaCommand}">Remove</Button>
+                            <Button Margin="5" Command="{Binding CancelRemovingCinemaCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center" Margin="79,258,79,165" >
+                        <TextBlock Text="Here you can edit the city name:" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <DataGrid ItemsSource="{Binding Cinemas, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Cinema Name:" Binding="{Binding title}" Width="100"/>
+                                <DataGridTextColumn Header="Cinema Address:" Binding="{Binding address}" Width="200"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Save" Command="{Binding DatabaseSaveChangesCommand}" Margin="10"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </TabItem>
+
+            <TabItem  Header="Edit Film">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock Text="Here you can add the film:" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <TextBlock Text="Choose the categories of film:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <ComboBox ItemsSource="{Binding CategoriesOfFilmToAdd, UpdateSourceTrigger=PropertyChanged}" Margin="5">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <TextBlock Text="{Binding Title}" HorizontalAlignment="Left"/>
+                                        <CheckBox IsChecked="{Binding Is_Chosen}" HorizontalAlignment="Right"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+
+                        <TextBlock Text="Title of the film:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Margin="10" Text="{Binding TitleOfFilmToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Trailer Video Url:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Margin="10" Text="{Binding TrailerUrlOfFilmToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Text="Image Url:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Margin="10" Text="{Binding ImageUrlOfFilmToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Film Description:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <TextBox Text="{Binding FilmDescriptionToAdd, UpdateSourceTrigger=PropertyChanged}" Margin="5" Height="100" TextWrapping="WrapWithOverflow"/>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding AddFilmCommand}">Add</Button>
+                            <Button Margin="5" Command="{Binding CancelAddingFilmCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock Text="Here you can remove the film (if you went wrong):" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <ComboBox ItemsSource="{Binding FilmsToDelete}" SelectedItem="{Binding SelectedFilmToDelete}" Margin="10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding RemoveFilmCommand}">Remove</Button>
+                            <Button Margin="5" Command="{Binding CancelRemovingFilmCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center" Margin="32,454,32,-31" Width="436" >
+                        <TextBlock Text="Here you can edit the film information:" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <DataGrid ItemsSource="{Binding Films, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Film Title:" Binding="{Binding title}" Width="100"/>
+                                <DataGridTextColumn Header="Trailer Url:" Binding="{Binding trailer_url}" Width="170"/>
+                                <DataGridTextColumn Header="Image Url:" Binding="{Binding image_url}" Width="200"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Save" Command="{Binding DatabaseSaveChangesCommand}" Margin="20"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </TabItem>
+
+            <TabItem  Header="Edit Category">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock Text="Here you can add the category:" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <TextBox Margin="10" ToolTip="Input the category to add." Text="{Binding CategoryToAdd, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding AddCategoryCommand}">Add</Button>
+                            <Button Margin="5" Command="{Binding CancelAddingCategoryCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock Text="Here you can remove the category (if you went wrong):" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <ComboBox ItemsSource="{Binding CategoriesToDelete, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCategoryToDelete}" Margin="10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding RemoveCategoryCommand}">Remove</Button>
+                            <Button Margin="5" Command="{Binding CancelRemovingCategoryCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
+                        <TextBlock Text="Here you can edit the category name:" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <DataGrid ItemsSource="{Binding Categories, UpdateSourceTrigger=PropertyChanged}" CanUserAddRows="False" AutoGenerateColumns="False" CanUserDeleteRows="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Category Name:" Binding="{Binding title}" Width="170"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Save" Command="{Binding DatabaseSaveChangesCommand}" Margin="10"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+
+            </TabItem>
+            <TabItem  Header="Edit Session">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+
+                        <TextBlock Text="Here you can add the movie session:" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <TextBlock Text="Cinema:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <ComboBox ItemsSource="{Binding Cinemas}" Margin="5" SelectedItem="{Binding SelectedCinemaSession, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Hall:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <ComboBox ItemsSource="{Binding Halls}" Margin="5" SelectedItem="{Binding SelectedHallSession, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Film:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <ComboBox ItemsSource="{Binding Films}" Margin="5" SelectedItem="{Binding SelectedFilmSession, UpdateSourceTrigger=PropertyChanged}"/>
+
+                        <TextBlock Text="Date:" Margin="5" Style="{StaticResource TextBlockColorStyle}"/>
+                        <DatePicker Margin="5" Background="Black" SelectedDate="{Binding SelectedDateSession}"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding AddSessionCommand}">Add</Button>
+                            <Button Margin="5" Command="{Binding CancelAddingSessionCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1">
+
+                        <TextBlock Text="Here you can remove the session (if you went wrong):" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <ComboBox ItemsSource="{Binding SessionsToDelete, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedSessionToDelete}" Margin="10"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Margin="5" Command="{Binding RemoveSessionCommand}">Remove</Button>
+                            <Button Margin="5" Command="{Binding CancelRemovingSessionCommand}">Cancel</Button>
+                        </StackPanel>
+
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center" Margin="0 150 0 0">
+                        <TextBlock Text="Here you can edit the session info:" TextWrapping="WrapWithOverflow" HorizontalAlignment="Center" Style="{StaticResource TextBlockHeaderStyle}" Margin="5"/>
+
+                        <DataGrid x:Name="dg_Sessions" 
+                                  ItemsSource="{Binding Sessions, UpdateSourceTrigger=PropertyChanged}"
+                                  CanUserAddRows="False"
+                                  AutoGenerateColumns="False"
+                                  CanUserDeleteRows="False"
+                                  MinWidth="200" Width="294"
+                                  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Session ID:" Binding="{Binding id}" Width="80"/>
+
+                                <DataGridTemplateColumn Header="Film:" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedValue="{Binding id_film, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="id" DisplayMemberPath="title" ItemsSource="{Binding DataContext.Films, ElementName=dg_Sessions}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Cinema:" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedValue="{Binding id_cinema}" SelectedValuePath="id" DisplayMemberPath="title" ItemsSource="{Binding DataContext.Cinemas, ElementName=dg_Sessions}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Hall:" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedValue="{Binding id_hall}" SelectedValuePath="id" DisplayMemberPath="title_number" ItemsSource="{Binding DataContext.Halls, ElementName=dg_Sessions}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Date:" Width="100">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <DatePickerTextBox Text="{Binding date}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <Button Content="Save" Command="{Binding DatabaseSaveChangesCommand}" Margin="10"/>
+
+                    </StackPanel>
+
+                </Grid>
+
+
+
+            </TabItem>
+
+        </TabControl>
+
+    </Grid>
+</Window>
